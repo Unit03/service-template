@@ -1,0 +1,6 @@
+tornado
+requests
+mock
+pytest
+pytest-tornado
+flex

@@ -9,17 +9,16 @@ def running_app_base_url(request):
 
     port = 8888
 
-    app = web.make_app()
-    app.listen(port)
+    web.make_app().listen(port)
 
     def run_server():
         tornado.ioloop.IOLoop.instance().start()
-
-    threading.Thread(target=run_server).start()
 
     def fin():
         tornado.ioloop.IOLoop.instance().stop()
 
     request.addfinalizer(fin)
+
+    threading.Thread(target=run_server).start()
 
     return "http://localhost:{}/".format(port)

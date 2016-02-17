@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  template:
+    container_name: template
+    build:
+      context: ../
+      dockerfile: envronment/Dockerfile
+
+    depends_on:
+      - template_mysql
+      - template_rabbitmq
+
+  template_mysql:
+    image: mysql:5.6
+    environment:
+      - MYSQL_DATABASE=template
+      - MYSQL_ROOT_PASSWORD=password
+
+  template_rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_NODENAME=rabbit
+      - COUCHBASE_PASS=""
+    mem_limit: 2g
+
+  template_redis:
+    image: redis
